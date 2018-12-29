@@ -1,0 +1,5 @@
+1. ` translates to 'Wa'. It is used instead of "'". Need to be corrected before conversion.
+2. "ÂÂ" gives rise to two halanta marks. Need to convert to "Â".
+3. '¶ÉÞ Ë½þºÉÉªÉÉ¨ÉÂ' gives "शृ Ëहसायाम्". Should be hiMsAyAm.
+4. æ is रेफ+ओ like varRo.
+
