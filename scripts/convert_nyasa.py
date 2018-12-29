@@ -31,7 +31,7 @@ if __name__ == "__main__":
 	data = re.sub(u"(\W)`", u"\g<1>'", data) # problem 1
 	data = data.replace("ÂÂ", "Â") # problem 2
 	data = data.replace("%", "ऽ") # Problem 3
-	data = data.replace("ÂòÂ", "Â") # Problem 4
+	data = re.sub("Â[òù]Â", "Â", data) # Problem 4
 	#data = re.sub(u"(\w)=(\w)", u"\g<1>-\g<2>", data) # problem 3
 	fout = codecs.open('../interim/a8p4_preprocessed.txt', 'w', 'utf-8')
 	fout.write(data)
