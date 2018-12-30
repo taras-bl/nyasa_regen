@@ -1,0 +1,452 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body><h3>DV-TTSurekhEN से यूनिकोड फ़ोण्ट परिवर्तित्र (11-7-2009)</h3> 
+
+
+<script type="text/javascript">
+
+// This file is derived from DV-TTYogeshEN to Unicode Converter.  DV-TTYogeshEN  &  DV-TTSurekhEN  are very similar.
+
+
+function convert_to_unicode()
+{
+
+var array_one = new Array( "$","&","*","£Ã",  // "%",
+
+"+Éä","+Éè","+É","+",   '<È',   "<Ç","<",">","=","@","A",  "Bå",   "Bä", "‹ä", "B", "‹", "आå", "आé",   
+
+"C","D","E","F","G","H","I","J","K","L","M","N","O",
+"P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_",
+
+"`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+"p","q","r","s","t","u","v","w","x","y","z","{","|","}","~",
+
+"¡","¢","£","¤","¥","¦","§","¨","©","ª","«","®","¯",  "¬",     
+"°","±","²","³","´","µ","¶", "•", '·', "¸","¹","º","»",  
+
+"À", "Á", "¾", "¿", "¼", "½",
+"Â", "Ã", "Ä", "Æ", "Å",
+
+"ä","è","Éä","Éè","É","Ò","Ö","×","Ù","Ú","Ý","Þ","ß","्ा",
+"å","é","ì",
+
+"ð","ñ","ò","ó","ô","õ","ö","÷","ø","ù","ú","û","ü","ý","þ",
+"ाे","ाै","आॅ","ाॅ" ,  "\'", 'रू '   )
+
+
+var array_two = new Array( "ॐ","ः","।","फ़्र",  // "ऽ",
+
+"ओ","औ","आ","अ",   "ईं",   "ई","इ","ऊ","उ","ऋ","ॠ",  'ऐं',  "ऐ", "ऐ", "ए", "ए", "ओं", "औं",
+
+"क्","क़्","क","क़","क्र","क्त","क्ष्","ख्","ख़्","ख्र्","ग्","ग़्","ग्र्",
+"घ्","घ्र्","ङ","च्","च्र्","छ","ज्","ज़्","ज्र्","ज्ञ्","झ्","झ्र्","ञ्","ट","ट्ट","ट्ठ",
+
+"ठ","ठ्ठ","ड","ड़","ड्ड","ड्ढ","ढ","ढ़","ण्","त्","त्र्","त्त्","थ्","थ्र्","द","दृ",
+"द्र","द्द" ,"द्ध","द्म","द्य","द्व","ध्","ध्र्","न्","न्र्","न्न्","प्","प्र्","फ्","फ़्",
+
+"फ","फ़","फ्र","ब्","ब्र्","भ्","भ्र्","म्","म्र्","य्","य्र्","र","रु",   "्य",     
+"रू","ल्","ळ्","ळ","व्","व्र्","श्", "श्व्", 'श्व्', "श्र्","ष्","स्","स्र्",
+
+"ह्म", "ह्य", "हृ", "ह्र", "ह्", "ह",
+"्", "़", "ँ", "ं", "्र",
+
+"े","ै","ो","ौ","ा","ी","ु","ु","ु","ू","ू","ृ","ॄ","",
+"ें","ैं","ॅ",
+
+"","","","","","","","","","","","","","","",
+"ो","ौ","ऑ","ॉ" ,  '\"', ' डिग्री ' )
+
+//***********************************************************
+// The following two characters are to be replaced through proper checking of locations:
+//*********************************************************
+// "Ç" 
+// "र्" (reph) 
+//
+// "Ê"  or "Î"
+// "ि"  
+//************************************************************
+
+var array_one_length = array_one.length ;
+
+document.getElementById("unicode_text").value = "You have chosen SIMPLE TEXT  in DV-TTSurekhEN  to convert into Unicode."  ;  
+
+    var modified_substring = document.getElementById("legacy_text").value  ;
+
+//************************************************************
+//  Break the long text into small bunches of max. max_text_size  characters each.
+//************************************************************
+    var text_size = document.getElementById("legacy_text").value.length ;
+
+    var processed_text = '' ;  //blank
+
+//**********************************************
+//    alert("text size = "+text_size);
+//**********************************************
+
+    var sthiti1 = 0 ;  var sthiti2 = 0 ;  var chale_chalo = 1 ;
+ 
+    var max_text_size = 6000;
+
+    while ( chale_chalo == 1 ) 
+    {
+     sthiti1 = sthiti2 ; 
+
+     if ( sthiti2 < ( text_size - max_text_size ) )  
+     { 
+      sthiti2 +=  max_text_size ;
+      while (document.getElementById("legacy_text").value.charAt ( sthiti2 ) != ' ') {sthiti2--;}
+     } 
+     else  { sthiti2 = text_size  ;  chale_chalo = 0 }
+      
+//     alert(" sthiti 1 = "+sthiti1); alert(" sthit 2 = "+sthiti2) 
+
+     var modified_substring = document.getElementById("legacy_text").value.substring ( sthiti1, sthiti2 )  ;
+
+    Replace_Symbols( )  ;
+
+    processed_text += modified_substring ;
+
+    document.getElementById("unicode_text").value = processed_text  ;
+
+   }  // chalechalo while loop  ends
+
+
+//***********************************************************************
+//-------- code for  keeping English words (which are within  small bracket) unchanged----------------
+
+if ( document.form1.chkbx1.checked )  //  keep text inside () brackets unchanged if the checkbox is checked.
+
+{ 
+   var remaining_text = processed_text ;
+   var processed_text = "" ;  //blank initially
+
+idx = remaining_text.indexOf( "\(" , idx )
+var idx2 = 0  //  position_of_closing bracket ")"
+
+var idx3 = 0  //  position of  "("  in the legacy text
+var idx4 = 0  //  postion of   ")"  in the legacytext
+
+while ( idx != -1 )    // while-01 loop     ;  while "("  is found..
+
+{  
+idx2 = remaining_text.indexOf( "\)" , idx )  
+
+idx3 = document.getElementById("legacy_text").value.indexOf( "\(" , idx4 ) ;
+idx4 = document.getElementById("legacy_text").value.indexOf( "\)" , idx3 ) ;
+
+processed_text = processed_text + remaining_text.substring( 0 , idx ) + document.getElementById("legacy_text").value.substring( idx3 , idx4+1 )  ;   
+
+remaining_text = remaining_text.substring( idx2 + 1 ) ; 
+idx = remaining_text.indexOf( "\(" ) ;
+
+} //end of outermost while-01
+
+    processed_text = processed_text + remaining_text ;
+
+    document.getElementById("unicode_text").value = processed_text  ;
+
+}   // end of chkbx if statmt
+
+//---------- End of the code for maintaining small braketed content intact-------------
+//************************************************************
+
+
+// --------------------------------------------------
+
+
+function Replace_Symbols( )
+
+{
+
+//substitute array_two elements in place of corresponding array_one elements
+
+if ( modified_substring != "" )  // if stringto be converted is non-blank then no need of any processing.
+{
+for ( input_symbol_idx = 0;   input_symbol_idx < array_one_length;    input_symbol_idx++ )
+
+{ 
+
+idx = 0  ;  // index of the symbol being searched for replacement
+
+while (idx != -1 ) //while-00
+{
+
+modified_substring = modified_substring.replace( array_one[ input_symbol_idx ] , array_two[input_symbol_idx] )
+idx = modified_substring.indexOf( array_one[input_symbol_idx] )
+
+} // end of while-00 loop
+} // end of for loop
+
+//alert(" modified substring = "+modified_substring)
+
+//**********************************************************************************
+// Code for Replacing five Special glyphs
+//**********************************************************************************
+//"æ","ç","ê","ë",
+//"र्ä","र्å","र्è","र्é",    
+
+//**********************************************************************************
+// Code for Glyph1 : È (reph+anusvAr)
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /È/g , "Çं" ) ; // at some places  ì  is  used eg  in "कर्कंधु,पूर्णांक".
+
+//**********************************************************************************
+// Code for Glyph2 : ç (ekAr+reph+anusvAr)
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /ç/g , "Çें") ; 
+
+//**********************************************************************************
+// Code for Glyph3 : æ (ekAr+reph)
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /æ/g , "Çे") ; 
+
+//**********************************************************************************
+// Code for Glyph4 : ë (aikAr+reph+anusvAr)
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /ë/g , "Çैं") ; 
+
+//**********************************************************************************
+// Code for Glyph5 : ê (aikAr+reph)
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /ê/g , "Çै") ; 
+
+//**********************************************************************************
+// Code for Glyph6 : Ô ( reph + ी )
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /Ô/g , "Çी" ) ; 
+
+//**********************************************************************************
+// Code for Glyph7 : Ó ( ी + anusvAr )
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /Ó/g , "ीं" ) ; 
+
+//**********************************************************************************
+// Code for Glyph8 : Õ ( reph + ी + anusvAr )
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /Õ/g , "Çीं" ) ; 
+
+
+//**********************************************************************************
+// Code for Glyph09 : Ì  ( reph + ि )
+// Code for Glyph10 : Î  (ि) [ikAr mAtrA before a संयुक्ताक्षर as in क्लिष्ट, स्थित etc)
+//   replace "Ê" and "Î" with "ि" and correcting its position too(moving it one position forward)
+//**********************************************************************************
+   modified_substring = modified_substring.replace( /Ì/g , "र्Ê" ) ;  // at some places  Ì  is  used eg  in "धार्मिक".
+   modified_substring = modified_substring.replace( /Î/g , "Ê" ) ;  
+
+var position_of_i = modified_substring.indexOf( "Ê" )
+
+while ( position_of_i != -1 )  //while-02
+{
+var charecter_next_to_i = modified_substring.charAt( position_of_i + 1 )
+var charecter_to_be_replaced = "Ê" + charecter_next_to_i
+modified_substring = modified_substring.replace( charecter_to_be_replaced , charecter_next_to_i + "ि" ) 
+position_of_i = modified_substring.search( /Ê/ , position_of_i + 1 ) // search for i ahead of the current position.
+
+} // end of while-02 loop
+
+//**********************************************************************************
+// Code for Glyph8 : Ë ("िं") 
+// Code for Glyph9 : Í ("र्िं")
+//   replace Ë with "िं"  and correcting its position too(moving it two positions forward)
+//**********************************************************************************
+modified_substring = modified_substring.replace( /Í/g , "र्Ë" ) ; // at some places  Í  is  used eg  in "शर्मिंदा"
+modified_substring = modified_substring.replace( /Ë/g , "ÊÆ" ) ; // at some places  Ë  is  used eg  in "किंकर".
+
+var position_of_i = modified_substring.indexOf( "ÊÆ" )
+
+while ( position_of_i != -1 )  //while-02
+{
+var charecter_next_to_ip2 = modified_substring.charAt( position_of_i + 2 )
+var charecter_to_be_replaced = "ÊÆ" + charecter_next_to_ip2
+modified_substring = modified_substring.replace( charecter_to_be_replaced , charecter_next_to_ip2 + "िं" ) 
+position_of_i = modified_substring.search( /ÊÆ/ , position_of_i + 2 ) // search for i ahead of the current position.
+
+} // end of while-02 loop
+
+
+//**********************************************************************************
+// End of Code for Replacing four Special glyphs
+//**********************************************************************************
+
+// following loop to eliminate 'chhotee ee kee maatraa' on half-letters as a result of above transformation.
+
+var position_of_wrong_ee = modified_substring.indexOf( "ि्" ) 
+
+while ( position_of_wrong_ee != -1 )  //while-03
+
+{
+var consonent_next_to_wrong_ee = modified_substring.charAt( position_of_wrong_ee + 2 )
+var charecter_to_be_replaced = "ि्" + consonent_next_to_wrong_ee 
+modified_substring = modified_substring.replace( charecter_to_be_replaced , "्" + consonent_next_to_wrong_ee + "ि" ) 
+position_of_wrong_ee = modified_substring.search( /ि्/ , position_of_wrong_ee + 2 ) // search for 'wrong ee' ahead of the current position. 
+
+} // end of while-03 loop
+
+
+// Ï = "िं"  in  वेल्डिंग, कनेक्टिंग  etc
+var position_of_i = modified_substring.indexOf( "Ï" )
+
+while ( position_of_i != -1 )  //while-02
+{
+var charecter_next_to_i = modified_substring.charAt( position_of_i + 1 );
+var charecter_second_next_to_i = modified_substring.charAt( position_of_i + 3 );
+var charecter_to_be_replaced = "Ï" + charecter_next_to_i + "्" + charecter_second_next_to_i ;
+
+modified_substring = modified_substring.replace( charecter_to_be_replaced , charecter_next_to_i + "्" + charecter_second_next_to_i + "िं" ) ;
+
+position_of_i = modified_substring.search( /Ï/ , position_of_i + 2 ) // search for i ahead of the current position.
+
+} // end of while-02 loop
+
+
+//-------------------------------------------------
+// Eliminating reph "Ç" and putting 'half - r' at proper position for this.
+set_of_matras = "ा ि ी ु ू ृ े ै ो ौ ं : ँ ॅ" 
+var position_of_R = modified_substring.indexOf( "Ç" )
+
+while ( position_of_R > 0 )  // while-04
+{
+probable_position_of_half_r = position_of_R - 1 ;
+var charecter_at_probable_position_of_half_r = modified_substring.charAt( probable_position_of_half_r )
+
+
+// trying to find non-maatra position left to current O (ie, half -r).
+
+while ( set_of_matras.match( charecter_at_probable_position_of_half_r ) != null )  // while-05
+
+{
+probable_position_of_half_r = probable_position_of_half_r - 1 ;
+charecter_at_probable_position_of_half_r = modified_substring.charAt( probable_position_of_half_r ) ;
+
+} // end of while-05
+
+// following four lines added on 11-7-09
+var charecter_left_to_probable_position_of_half_r = modified_substring.charAt( probable_position_of_half_r - 1 )
+
+if (charecter_left_to_probable_position_of_half_r == '्' ) 
+ probable_position_of_half_r = probable_position_of_half_r - 2 ;
+
+
+charecter_to_be_replaced = modified_substring.substr ( probable_position_of_half_r , ( position_of_R - probable_position_of_half_r ) ) ;
+new_replacement_string = "र्" + charecter_to_be_replaced ; 
+charecter_to_be_replaced = charecter_to_be_replaced + "Ç" ;
+modified_substring = modified_substring.replace( charecter_to_be_replaced , new_replacement_string ) ;
+position_of_R = modified_substring.indexOf( "Ç" ) ;
+
+} // end of while-04
+
+} // end of IF  statement  meant to  supress processing of  blank  string.
+
+   modified_substring = modified_substring.replace( /ाे/g , "ो") ; 
+   modified_substring = modified_substring.replace( /ाै/g , "ौ") ; 
+
+
+} // end of the function  Replace_Symbols
+
+
+} // end of legacy_to_unicode function
+
+
+</script>
+
+
+
+
+
+
+<!-- ----------------------------------------------------------------------------------
+      body of the HTML starts here. one text box is provided each for input and output. 
+-->
+
+
+
+<form name="form1">
+Paste the text in <b>DV-TTSurekhEN</b> font in the box below.<br>
+
+<textarea name="TextToConvert" id="legacy_text" cols="80" rows="8">
+65. +±ÉÉäऽxiªÉÉi{ÉÚ´ÉÇ ={ÉvÉÉ* (1.1.65)
++±ÉÉäऽxiªÉÉÊnùÊiÉºÉ¨ÉÉxÉÉÊvÉEò®úhÉä {É\SÉ¨ªÉÉè* 'vÉÉi´ÉÉnùÉè 
+´ÉhÉÇºÉ¨ÉÖnùÉªÉä'&lt;ÊiÉ* xÉxÉÖ SÉ xÉä½þ ´ÉhÉÇºÉ¨ÉÖnùÉªÉ OÉ½þhÉ¨ÉÎºiÉ, 
+xÉÉÊ{É iÉiÉÂ |ÉEÞòiÉ¨ÉÂ* iÉiÉÂ EòlÉ¨Éä¹ÉÉäऽlÉÉæ ±É¦ªÉiÉä ? 
++xiªÉOÉ½þhÉÉiÉÂ, ºÉ¨ÉÖnùÉªÉºªÉè´ÉÉxiªÉÉäऽ±ÉÂ ¦É´ÉÊiÉ, xÉ Eäò´É±É&amp;* 
+iÉº¨ÉÉnùxiªÉOÉ½þhÉÉnäù¹ÉÉäऽlÉÉæ ±É¦ªÉiÉä*
+'+±Éä´É' &lt;ÊiÉ*B´ÉEòÉ®úEò®úhÉÉnäù´ÉÉ±ºÉ¨ÉÖnùÉªÉÉä ´ªÉ´ÉÎSUôtiÉä* xÉxÉÖ
+ SÉ xÉä½þ ÊuùiÉÒªÉ-
+¨É±ÉÂOÉ½þhÉ¨ÉÎºiÉ, iÉnù±ºÉÖ¨ÉÖnùÉªÉºªÉÉ{ªÉä¹ÉÉ ºÉÆYÉÉ EòºÉ¨ÉÉzÉ ¦É´ÉÊiÉ ?
+ ±ÉÉäEòiÉ¶SÉ* ±ÉÉäEäò
+Á¨ÉÒ¹ÉÉÆ ¤ÉÉÀhÉÉxÉÉ¨ÉxiªÉÉiÉÂ {ÉÚ´ÉÇ +ÉxÉÒªÉiÉÉÊ¨ÉiªÉÖHòBEò B´ÉÉxiªÉÉiÉÂ
+ {ÉÚ´ÉÇ +ÉxÉÒªÉiÉä, xÉ ºÉ¨ÉÖnùÉªÉ&amp; * B´É¨É{ªÉ±É B´É ´ªÉ´ÉÊ½þiÉºªÉ 
+Eòº¨ÉÉnäù¹ÉÉ ºÉÆYÉÉ xÉ ¦É´ÉÊiÉ ? ´ªÉÊ½þiÉäऽÊ{É {ÉÚ´ÉÇ¶É¤nùÉä ´ÉkÉÇiÉ 
+B´É* +iÉ B´É ±ÉÉèÊEòEòÉnÂù où¹]õÉxiÉÉiÉÂ-- ±ÉÉäEäò ÁxiªÉÉiÉÂ 
+{ÉÚ´ÉÇ¨ÉÉxÉªÉäiªÉÖHäò xÉ EòÎ¶SÉnÂù ´ªÉ´ÉÊ½þiÉ¨ÉÉxÉªÉÊiÉ, +Ê{É 
+i´ÉxÉxÉiÉ®ú¨Éä´É* ªÉÊnù Á±É B´Éè¹ÉÉ ºÉÆYÉÉ, xÉÉ±ºÉ¨ÉÖnùÉªÉºªÉ,
+'@ñiÉ¶SÉ ºÉÆªÉÉäMÉÉnäùMÉÖÇhÉ&amp;'(7.4.10) &lt;iªÉjÉ ªÉnÂù ´ÉIªÉÊiÉ-- 
+'ºÉÆªÉÉäMÉÉÊnùMÉÖhÉÊ´ÉvÉÉxÉä ºÉÆªÉÉäMÉÉä{ÉvÉOÉ½þhÉÆ EòkÉÇ´ªÉ¨ÉÂ' 
+&lt;ÊiÉ, iÉnÂù´ªÉÉ½þxªÉiÉä; xÉ Á±É 
+B´ÉÉä{ÉvÉÉºÉÆYÉÉªÉÉ¨ÉxÉäEòÉxÉxiÉ®ú½þ±ºÉ¨ÉÖnùÉªÉÉi¨ÉxÉ&amp; 
+ºÉÆªÉÉäMÉºªÉÉä{ÉvÉÉi´É¨ÉÖ{É{ÉtiÉä* 
+ºÉÆªÉÉäMÉÉ´ÉªÉ´ÉºªÉÉä{ÉvÉÉi´ÉÉnù´ÉªÉ´ÉvÉ¨ÉæhÉ ºÉ¨ÉÖnùÉªÉºªÉ iÉlÉÉ
+´ªÉ{Énäù¶É &lt;iªÉÊ´É®úÉävÉ&amp;* ¦É´ÉÊiÉ Á´ÉªÉ´ÉvÉ¨ÉæhÉ ºÉ¨ÉÖnùÉªÉºªÉ 
+iÉlÉÉ ´ªÉ{Énäù¶É&amp;, ªÉlÉÉ--
++Éfø¬Ê¨ÉnÆù xÉMÉ®úÊ¨ÉÊiÉ *
++lÉ ´ÉÉ- ºÉÆªÉÉäMÉºªÉÉ±{ÉÚ´ÉÇi´ÉÉä{É±ÉIÉhÉÉlÉÈ iÉjÉÉä{ÉvÉÉOÉ½þhÉÆ 
+pù¹]õ´ªÉ¨ÉÂ* +EòÉ®ú &lt;iªÉÉnùÒÊxÉ °ü{ÉÉänùÉ½þ®úhÉÉÊxÉ* EòÉªÉÈ 
+i´ÉEòÉ®úºªÉÉä{ÉvÉÉºÉÆYÉÉªÉÉÆ {ÉÉSÉEò&amp;, {ÉÉ`öEò &lt;iªÉjÉ '+iÉ 
+={ÉvÉÉªÉÉ&amp;' (7.2.116) &lt;ÊiÉ ´ÉÞÊrù&amp;* &lt;EòÉ®ú±ÉÞEòÉ®úªÉÉäºiÉÖ
+ ¦ÉänùEò&amp;, UäônùEò&amp;, ´ÉkÉÇEò&amp; ´ÉrÇùEò &lt;ÊiÉ* +jÉ 
+'{ÉÖMÉxiÉ±ÉPÉÚ{ÉvÉºªÉ' (7.3.86) &lt;ÊiÉ MÉÖhÉ&amp;*
+'Ê¶É¹]õ&amp;' &lt;ÊiÉ* '¶ÉÉºÉÖ +xÉÖÊ¶É¹]õÉè' (vÉÉ.{ÉÉ.1075), ÊxÉ¹`öÉ, 
+'¶ÉÉºÉ &lt;nùRó ½þ±ÉÉä&amp;' (6.4.34) &lt;ÊiÉ ={ÉvÉÉªÉÉ &lt;k´É¨ÉÂ* iÉjÉ
+ Ê½þ '+ÊxÉÊnùiÉÉ¨ÉÂ' (6.4.24) &lt;iªÉÉnäù&amp; 
+ºÉÖjÉÉnÖù{ÉvÉÉOÉ½þhÉ¨ÉxÉÖ´ÉkÉÇiÉä* '¶ÉÉÊºÉ´ÉÊºÉ' (8.3.60) &lt;iªÉÉÊnùxÉÉ
+ ¹Éi´É¨ÉÂ* 'ºÉ¨ÉÖnùÉªÉÉiÉÂ' &lt;iªÉÉÊnù* +EòÉ®úºÉEòÉ®úºÉ¨ÉÖnùÉªÉÉiÉÂ* 
+{ÉÚ´ÉÇºªÉ ¶ÉEòÉ®úºªÉÉä{ÉvÉÉºÉÆYÉÉ ¨ÉÉ ¦ÉÚÊnùiªÉlÉÇ&amp;* ªÉÊnù Ê½þ 
+ºªÉÉiÉÂ,iÉºªÉè´Éäk´ÉÆ ºªÉÉiÉÂ**
+</textarea> <br><br>
+
+<div align="left">
+
+<input type="checkbox" name="chkbx1"> Do not convert text inside () 
+brackets.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+<input type="button" id="converter" name="converter" value=" Convert to Unicode &gt;&gt; " onclick="convert_to_unicode();" accesskey="c" title="शॉर्टकट alt+c"> 
+</div>  <br>
+
+This is <b>Unicode</b> equivalent of the above : <br>
+<textarea name="ConvertedText" id="unicode_text" cols="85" rows="11">
+65. अलोऽन्त्यात्पूर्व उपधा। (1.1.65)
+अलोऽन्त्यादितिसमानाधिकरणे पञ्चम्यौ। "धात्वादौ वर्णसमुदाये"इति। ननु च नेह
+ वर्णसमुदाय ग्रहणमस्ति, नापि तत् प्रकृतम्। तत् कथमेषोऽर्थो लभ्यते ? 
+अन्त्यग्रहणात्, समुदायस्यैवान्त्योऽल् भवति, न केवलः। 
+तस्मादन्त्यग्रहणादेषोऽर्थो लभ्यते।
+"अलेव" इति।एवकारकरणादेवाल्समुदायो व्यवच्छिद्यते। ननु च नेह द्वितीय-
+मल्ग्रहणमस्ति, तदल्सुमुदायस्याप्येषा संज्ञा कसमान्न भवति ? लोकतश्च। लोके
+ह्यमीषां बाह्मणानामन्त्यात् पूर्व आनीयतामित्युक्तएक एवान्त्यात् पूर्व 
+आनीयते, न समुदायः । एवमप्यल एव व्यवहितस्य कस्मादेषा संज्ञा न भवति ? 
+व्यहितेऽपि पूर्वशब्दो वर्त्तत एव। अत एव लौकिकाद् दृष्टान्तात्-- लोके 
+ह्यन्त्यात् पूर्वमानयेत्युक्ते न कश्चिद् व्यवहितमानयति, अपि त्वननतरमेव। 
+यदि ह्यल एवैषा संज्ञा, नाल्समुदायस्य,
+"ऋतश्च संयोगादेर्गुणः"(7.4.10) इत्यत्र यद् वक्ष्यति-- "संयोगादिगुणविधाने
+ संयोगोपधग्रहणं कर्त्तव्यम्" इति, तद्व्याहन्यते; न ह्यल 
+एवोपधासंज्ञायामनेकानन्तरहल्समुदायात्मनः संयोगस्योपधात्वमुपपद्यते। 
+संयोगावयवस्योपधात्वादवयवधर्मेण समुदायस्य तथा
+व्यपदेश इत्यविरोधः। भवति ह्यवयवधर्मेण समुदायस्य तथा व्यपदेशः, यथा--
+आढ्यमिदं नगरमिति ।
+अथ वा- संयोगस्याल्पूर्वत्वोपलक्षणार्थं तत्रोपधाग्रहणं द्रष्टव्यम्। अकार 
+इत्यादीनि रूपोदाहरणानि। कार्यं त्वकारस्योपधासंज्ञायां पाचकः, पाठक 
+इत्यत्र "अत उपधायाः" (7.2.116) इति वृद्धिः। इकारलृकारयोस्तु भेदकः, 
+छेदकः, वर्त्तकः वर्द्धक इति। अत्र "पुगन्तलघूपधस्य" (7.3.86) इति गुणः।
+"शिष्टः" इति। "शासु अनुशिष्टौ" (धा.पा.1075), निष्ठा, "शास इदङ हलोः" 
+(6.4.34) इति उपधाया इत्त्वम्। तत्र हि "अनिदिताम्" (6.4.24) इत्यादेः 
+सुत्रादुपधाग्रहणमनुवर्त्तते। "शासिवसि" (8.3.60) इत्यादिना षत्वम्। 
+"समुदायात्" इत्यादि। अकारसकारसमुदायात्। पूर्वस्य शकारस्योपधासंज्ञा मा 
+भूदित्यर्थः। यदि हि स्यात्,तस्यैवेत्त्वं स्यात्।।
+</textarea>
+<br><br>
+
+</form>
+
+
+
+</body></html>
