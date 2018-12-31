@@ -35,5 +35,12 @@ if __name__ == "__main__":
 				sutra_commentary = ''
 			else:
 				sutra_commentary += line
-		exit(0)
+		fout = codecs.open(dirname + '/' + sutranum + '.md', 'w', 'utf-8')
+		fout.write('---\n')
+		fout.write('index:  ' + sutranum + '\n')
+		fout.write('sutra:  ' + sutratext + '\n')
+		fout.write('vritti:  nyasa\n')
+		fout.write('---\n\n')
+		fout.write(sutra_commentary)
+
 		
