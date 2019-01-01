@@ -22,6 +22,7 @@ if __name__ == "__main__":
 		data = fin.read().split('\n')
 		fin.close()
 		fout = codecs.open(filename, 'w', 'utf-8')
+		data1 = ''
 		for line in data:
 			words = line.split(' ')
 			wordCorrected = []
@@ -35,6 +36,8 @@ if __name__ == "__main__":
 					wordCorrected.append(word)
 			
 			line = ' '.join(wordCorrected)
-			fout.write(line + '\n')
+			data1 = data1 + line + '\n'
+		data1 = data1.rstrip()
+		fout.write(data1)
 		fout.close()
 			
