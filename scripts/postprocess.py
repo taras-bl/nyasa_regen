@@ -14,6 +14,9 @@ if __name__ == "__main__":
 		# Manipulate data
 		data = data.replace('"', '`')
 		data = data.replace('््', '्')
+		data = data.replace(' उ ', ' = ')
+		data = data.replace('इ = ण्', 'इ उ ण्')
+		data = data.replace('= ऊ ऊ3', 'उ ऊ ऊ3')
 		# Write data
 		fileout = filename.replace('../output', '../postprocessed')
 		fout = codecs.open(fileout, 'w', 'utf-8')
