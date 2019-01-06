@@ -27,7 +27,7 @@ def preprocess_nyasa(filein, fileout):
     data = fin.read()
     fin.close()
     # Handle wrong data in input before pushing for transliteration.
-    data = re.sub(u"(\W)`", u"\g<1>'", data)  # problem 1
+    data = re.sub(u"(\W)`([^ö])", u"\g<1>'\g<2>", data)  # problem 1
     data = data.replace("ÂÂ", "Â")  # problem 2
     data = data.replace("%", "ऽ")  # Problem 3
     data = re.sub("Â[òù]Â", "Â", data)  # Problem 4
