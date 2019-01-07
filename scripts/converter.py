@@ -1,6 +1,6 @@
-import js2py
 import codecs
 import re
+import glob
 from indic_transliteration.sanscript import transliterate
 
 array_one = ["$","&","*","£Ã", "%",
@@ -53,6 +53,8 @@ deva_digits = ['०','१','२','३','४','५','६','७','८','९']
 eng_digits = ['0','1','2','3','4','5','6','7','8','9']
 
 def Replace_Symbols(text):
+	text = re.sub('Â=', 'Â #=# ', text)
+	text = re.sub('[ ]+=[ ]+', ' = ', text)
 	for i in range(array_one_length):
 		text = text.replace(array_one[i], array_two[i])
 	# Special issues
@@ -69,9 +71,9 @@ def Replace_Symbols(text):
 	text = text.replace('Î', 'Ê')
 	text = transliterate(text, 'devanagari', 'slp1')
 	text = re.sub('Ê([^a]+)a', '\g<1>i', text)
-	text = re.sub("([^aAiIuUfFxXeEoO\"'\n\-]+[aAiIuUfFxXeEoO])Ç", "r\g<1>", text)
-	text = re.sub('Ë([^aAiIuUfFxXeEoO]+)a', '\g<1>iM', text)
-	text = re.sub('Ï([^aAiIuUfFxXeEoO]+)a', '\g<1>iM', text)
+	text = re.sub("([^ aAiIuUfFxXeEoO\"'\n\-]+[aAiIuUfFxXeEoO])Ç", "r\g<1>", text)
+	text = re.sub('Ë([^ aAiIuUfFxXeEoO]+)a', '\g<1>iM', text)
+	text = re.sub('Ï([^ aAiIuUfFxXeEoO]+)a', '\g<1>iM', text)
 	text = text.replace('Ae', 'o')
 	text = text.replace('ae', 'e')
 	text = text.replace('aI', 'I')
@@ -79,6 +81,7 @@ def Replace_Symbols(text):
 	text = text.replace('AE', 'O')
 	text = transliterate(text, 'slp1', 'devanagari')
 	text = text.replace('॥', '।।')
+	text = text.replace(' #उ# ', ' = ')
 	for x in range(len(deva_digits)):
 		text = text.replace(deva_digits[x], eng_digits[x])
 	splts = re.split('(\([^)]*\))', text)
@@ -92,24 +95,14 @@ def Replace_Symbols(text):
 	text = re.sub('\n([0-9]+)।', '\n\g<1>.', text)
 	return text
 
-with codecs.open('../interim/a1p1.txt', 'r', 'utf-8') as fin:
-	data = fin.read()
-	data = Replace_Symbols(data)
-	with codecs.open('trial.txt', 'w', 'utf-8') as fout:
-		fout.write(data)
-js = """
-
-
-
-
-//-------------------------------------------------
-// Eliminating reph "Ç" and putting 'half - r' at prop
-   modified_substring = modified_substring.replace( /ाे/g , "ो") ; 
-   modified_substring = modified_substring.replace( /ाै/g , "ौ") ; 
-
-
-} // end of the function  Replace_Symbols
-console.log(modified_substring)
-"""
-
-#js2py.eval_js(js)
+if __name__ == "__main__":
+	filenames = glob.glob('../interim/*.txt')
+	print('conversion started')
+	for filein in filenames:
+		print(filein)
+		fileout = filein.replace('../interim', '../output')
+		with codecs.open(filein, 'r', 'utf-8') as fin:
+			data = fin.read()
+			data = Replace_Symbols(data)
+			with codecs.open(fileout, 'w', 'utf-8') as fout:
+				fout.write(data)

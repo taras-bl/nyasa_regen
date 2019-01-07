@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import codecs
 import re
 import glob
@@ -31,7 +32,6 @@ if __name__ == "__main__":
 				sutratext = m.group(1)
 				sutratext = sutratext.strip()
 				sutratext = sutratext.replace('।', '')
-				sutratext = sutratext.replace('`', '?')
 				print(sutranum)
 				sutra_commentary = ''
 			else:
