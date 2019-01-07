@@ -1,6 +1,6 @@
 ```
-python convert_nyasa.py preprocess
-#python convert_nyasa.py convert_nyasa
+python preprocess.py
+python converter.py
 python postprocess.py
 python issue1.py
 python create_md.py
