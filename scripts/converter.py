@@ -1,6 +1,7 @@
 import codecs
 import re
 import glob
+import sys
 from indic_transliteration.sanscript import transliterate
 
 array_one = ["$","&","*","£Ã", "%",
@@ -96,11 +97,12 @@ def Replace_Symbols(text):
 	return text
 
 if __name__ == "__main__":
-	filenames = glob.glob('../interim/*.txt')
+	book = sys.argv[1]
+	filenames = glob.glob('../' + book + '/interim/*.txt')
 	print('conversion started')
 	for filein in filenames:
 		print(filein)
-		fileout = filein.replace('../interim', '../output')
+		fileout = filein.replace('interim', 'output')
 		with codecs.open(filein, 'r', 'utf-8') as fin:
 			data = fin.read()
 			data = Replace_Symbols(data)
