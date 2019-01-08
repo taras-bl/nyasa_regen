@@ -3,23 +3,29 @@ import re
 import glob
 import sys
 
-if __name__ == "__main__":
-	filenames = glob.glob('../output/*.txt')
-	for filename in filenames:
-		print(filename)
-		# Read data
-		fin = codecs.open(filename, 'r', 'utf-8')
-		data = fin.read()
-		fin.close()
-		# Manipulate data
+
+def postprocess_book(book, filein, fileout):
+	# Read data
+	fin = codecs.open(filein, 'r', 'utf-8')
+	data = fin.read()
+	fin.close()
+	# Do book specific postprocessing.
+	if book == 'nyasa':
 		data = data.replace('"', '`')
 		data = data.replace('््', '्')
 		data = data.replace(' उ ', ' = ')
 		data = data.replace('इ = ण्', 'इ उ ण्')
 		data = data.replace('= ऊ ', 'उ ऊ')
-		# Write data
-		fileout = filename.replace('../output', '../postprocessed')
-		fout = codecs.open(fileout, 'w', 'utf-8')
-		fout.write(data)
-		fout.close()
+	# Write data
+	fout = codecs.open(fileout, 'w', 'utf-8')
+	fout.write(data)
+	fout.close()
+
+if __name__ == "__main__":
+	book = sys.argv[1]
+	filenames = glob.glob('../' + book + '/output/*.txt')
+	for filein in filenames:
+		print(filein)
+		fileout = filein.replace('output', 'postprocessed')
+		postprocess_book(book, filein, fileout)
 	
