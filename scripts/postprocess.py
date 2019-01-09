@@ -10,7 +10,7 @@ def postprocess_book(book, filein, fileout):
 	data = fin.read()
 	fin.close()
 	# Do book specific postprocessing.
-	if book == 'nyasa':
+	if book in ['nyasa']:
 		data = data.replace('"', '`')
 		data = data.replace('््', '्')
 		data = data.replace(' उ ', ' = ')
