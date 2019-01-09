@@ -10,13 +10,12 @@ def preprocess_book(book, filein, fileout):
 	data = fin.read()
 	fin.close()
 	# Special preprocessing for each book.
-	if book == 'nyasa':
+	if book in ['nyasa']:
 		# Handle wrong data in input before pushing for transliteration.
 		data = re.sub(u"(\W)`([^ö])", u"\g<1>'\g<2>", data)  # problem 1
 		data = data.replace("ÂÂ", "Â")  # problem 2
 		data = data.replace("%", "ऽ")  # Problem 3
 		data = re.sub("Â[òù]Â", "Â", data)  # Problem 4
-		#data = re.sub(u"(\w)=(\w)", u"\g<1>-\g<2>", data) # problem 3
 	fout = codecs.open(fileout, 'w', 'utf-8')
 	fout.write(data)
 	fout.close()
