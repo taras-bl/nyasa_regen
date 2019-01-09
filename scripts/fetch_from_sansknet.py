@@ -26,6 +26,8 @@ def get_full_data(commentary):
 			print(a, p)
 			html_data = fetch_pada(commentary, a, p)
 			html_data = html_data.replace('<BR>', '\n')
+			html_data = html_data.replace('<<', '<')
+			html_data = html_data.replace('>>', '>')
 			text_data = cleanhtml(html_data)
 			fileout = '../' + commentary + '/orig/a' + str(a) + 'p' + str(p) + '.txt'
 			fout = codecs.open(fileout, 'w', 'utf-8')
