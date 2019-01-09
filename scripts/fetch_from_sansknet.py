@@ -3,6 +3,7 @@ import os
 import sys
 import re
 import codecs
+from bs4 import BeautifulSoup
 
 
 commdict = {'kashika': 'kasikavritti', 'nyasa': 'kasikavritti/nyasa', 'padamanjari': 'kasikavritti/padamanjari'}
@@ -15,8 +16,8 @@ def fetch_pada(commentary, adhyaya, pada):
 	return r.text
 
 def cleanhtml(raw_html):
-	cleanr = re.compile('<.*?>')
-	cleantext = re.sub(cleanr, '', raw_html)
+	soup = BeautifulSoup(raw_html, 'html.parser')
+	cleantext = soup.get_text()
 	return cleantext
 
 def get_full_data(commentary):
