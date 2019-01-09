@@ -1,11 +1,11 @@
 echo "Step 0. Create folder structure."
-mkdir $1
-mkdir $1/input
-mkdir $1/interim
-mkdir $1/output
-mkdir $1/postprocessed
-mkdir $1/md
-mkdir $1/orig
+mkdir ../$1
+mkdir ../$1/input
+mkdir ../$1/interim
+mkdir ../$1/output
+mkdir ../$1/postprocessed
+mkdir ../$1/md
+mkdir ../$1/orig
 echo "Step 1. Preprocess input. Store in interim."
 python preprocess.py $1
 echo "Step 2. Convert to Devanagari. Store in output."
