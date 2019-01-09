@@ -10,7 +10,7 @@ def preprocess_book(book, filein, fileout):
 	data = fin.read()
 	fin.close()
 	# Special preprocessing for each book.
-	if book in ['nyasa']:
+	if book in ['nyasa', 'padamanjari']:
 		# Handle wrong data in input before pushing for transliteration.
 		data = re.sub(u"(\W)`([^ö])", u"\g<1>'\g<2>", data)  # problem 1
 		data = data.replace("ÂÂ", "Â")  # problem 2
